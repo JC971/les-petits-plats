@@ -1,0 +1,273 @@
+body {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Anton", sans-serif;
+	max-width: 1440px;
+	margin-right: auto;
+	margin-left: auto;
+	background-color: #e5e5e5;
+}
+
+.header {
+	background-image: url(./img/Mask\ group.png);
+	object-fit: contain;
+	background-repeat: no-repeat;
+	width: 100%;
+	padding-bottom: 100px;
+	margin-right: auto;
+	margin-left: auto;
+	display: flex;
+}
+
+.header-logo {
+	padding: 20px 2px;
+}
+.header-search {
+	display: flex;
+	align-items: center;
+}
+
+.header-search input[type="text"] {
+	width: 990px;
+	height: 72px;
+	border-radius: 11px;
+	margin-right: auto;
+	margin-left: auto;
+	background-image: url(./img/Loop\ CTA.svg);
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+}
+.header-search ::placeholder {
+	color: #7a7a7a;
+	font-size: 16px;
+	font-weight: 400;
+	padding-left: 35px;
+}
+
+.logo {
+	padding: 20px;
+}
+
+.header-text {
+	color: #ffd15b;
+	font-family: "Anton", sans-serif;
+	font-size: 44px;
+	width: 100%;
+	text-align: center;
+	padding-top: 90px;
+	padding-bottom: 100px;
+}
+
+/*icone flèche*/
+.ingredients-button img,
+.appareils-button img,
+.ustensiles-button img {
+	text-align: left;
+	position: absolute;
+	right: 8px;
+}
+.main-section {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: baseline;
+	align-content: stretch;
+}
+
+#recipes__cards {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: stretch;
+	align-content: stretch;
+	margin-top: 50px;
+}
+
+.recipe-image {
+	width: 100%;
+}
+/* place pour les photos  */
+.recipe-image img {
+	width: 100%;
+	height: 253px;
+	object-fit: cover;
+	border-radius: 21px 21px 0 0;
+}
+
+/* article complet */
+article {
+	width: 27%;
+	border-radius: 21px;
+	margin-bottom: 60px;
+	height: 731px;
+	background-color: white;
+}
+
+h2 {
+	font-family: "Anton", sans-serif;
+	color: #000000;
+	font-weight: 400;
+	font-size: 18px;
+	padding-left: 25px;
+}
+
+#total-recipes {
+	text-align: right;
+	font-size: 21px;
+	font-weight: 400;
+	color: #1b1b1b;
+	margin-right: 50px;
+	width: 250px;
+}
+
+/* description des recettes */
+.recipe-description {
+	font-size: 14px;
+	padding: 0 25px;
+	font-family: "Manrope", sans-serif;
+	color: #1b1b1b;
+}
+
+.recipe-text,
+.recipe-ingredients-title {
+	font-size: 12px;
+	font-family: "Manrope", sans-serif;
+	padding: 0 25px;
+}
+
+/*liste de mes ingredients*/
+.ingredient {
+	width: 45%;
+}
+.ingredients-button {
+	background-color: white;
+}
+
+.ingredients-list {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 25px;
+	justify-content: space-between;
+	margin-top: 0;
+	font-family: "Manrope", sans-serif;
+	list-style: none;
+
+}
+
+.ingredient-name {
+	font-family: "Manrope", sans-serif;
+	color: #1b1b1b;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.ingredient-details {
+	display: flex;
+	font-size: 14px;
+	font-family: "Manrope", sans-serif;
+	font-weight: 400;
+}
+
+/* titre recette et titre ingredients */
+.recipe-ingredients-title,
+.recipe-text {
+	font-weight: bold;
+	margin-top: 20px;
+}
+
+/* disposition des boutons ingredients appareils ustensiles*/
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-button {
+	height: 56px;
+	margin-top: 30px;
+	margin-left: 50px;
+	background-color: #ffffff;
+	color: #1b1b1b;
+	font-size: 16px;
+	font-weight: 500;
+	font-family: "Manrope", sans-serif;
+	border-radius: 11px;
+	padding-left: 0;
+	padding-right: 0;
+	
+}
+
+/* boutons ingredients ... */
+.ingredients-button,
+.appareils-button,
+.ustensiles-button {
+	width: 179px;
+	border: none;
+	position: relative;
+	cursor: pointer;
+	z-index: 10;
+}
+
+/*contenu de mes dropdowns*/
+.dropdown-content {
+	display: none;
+	position: absolute;
+	left: 50px;
+	top: 65px;
+	background-color: #ffffff;
+	width: 179px;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+	padding: 80px 0px;
+	color: #1b1b1b;
+	font-family: "Manrope", sans-serif;
+	font-size: 14px;
+
+}
+
+.dropdown-search {
+	width: 169px;
+	padding: 10px 0 00 px;
+	padding: 0;
+	border: solid 1px grey;
+	height: 40px;
+	position: absolute;
+	top: 80px;
+	left: 50px;
+	display: none;
+	z-index: 12;
+	margin: 5px;
+	background-image: url(./img/LightCross.svg);
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+	
+}
+
+.dropdown-content.show {
+	display: block;
+}
+
+.dropdown-item {
+	text-decoration: none;
+	list-style: none;
+	line-height: 30px;
+	padding-left: 8px;
+	cursor: pointer;
+}
+
+.no-result-text {
+	height: 150px;
+	width: 200px;
+	color: red;
+}
+
+.tag-style {
+	color: #1b1b1b;
+	font-size: 14px;
+	font-weight: 400;
+	padding-left: 16px;
+	
+}
+
