@@ -1,5 +1,7 @@
+
 // Fonction pour filtrer les recettes en fonction du nom, des ingrédients ou de la description
-function searchRecipes(query) {
+//dans index
+/*function searchRecipes(query) {
     query = query.toLowerCase().trim();
     const regex = new RegExp("\\b" + query + "\\b"); // en un seul mot
 
@@ -20,11 +22,11 @@ function searchRecipes(query) {
     });
   
     return filteredRecipes;
-}
+}*/
 
 // Gestion de la barre de recherche
 document.addEventListener('DOMContentLoaded', () => {
-    loadRecipes(); // Charge toutes les recettes
+
 
     const inputElement = document.querySelector('input[type="text"]');
     inputElement.addEventListener('input', () => {
