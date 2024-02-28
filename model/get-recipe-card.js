@@ -57,7 +57,7 @@ export function getRecipeCard(data) {
       detailsText += ingredient.unit ? ` ${ingredient.unit}` : "";
       detailsSpan.textContent = detailsText;
       item.appendChild(detailsSpan);
-      console.log(detailsSpan);
+      //console.log(detailsSpan);
     }
 
     ingredientsList.appendChild(item);

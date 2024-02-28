@@ -25,6 +25,7 @@
 }*/
 
 // Gestion de la barre de recherche
+/*
 document.addEventListener('DOMContentLoaded', () => {
 
 
@@ -41,3 +42,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+*/

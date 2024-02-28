@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			// Initialisation des dropdowns avec les actions spécifiques pour chacun
 			const dropdownActions = {
 				"ingredients-button": () =>
+					
 					displayList(getUniqueIngredients(), "ingredients-list"),
 				"appareils-button": () =>
 					displayList(getUniqueAppliances(), "appareils-list"),
@@ -40,7 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function getUniqueIngredients() {//pour ingredients-button
-	const ingredients = new Set(
+	
+	const ingredients = new Set( 
 		recipes
 			.map((recipe) =>
 				recipe.ingredients.map((ingredient) => ingredient.ingredient)
@@ -48,7 +50,7 @@ function getUniqueIngredients() {//pour ingredients-button
 			.flat()
 		
 	);
-	  
+	 
 	return Array.from(ingredients);
 }
 
@@ -56,7 +58,7 @@ function getUniqueAppliances() {//pour appareils-list
 	
 	const appliances = new Set(recipes.map((recipe) => recipe.appliance));
 
-
+console.log("Unique appliances:", Array.from(appliances));
 	return Array.from(appliances);
 	
 }
@@ -64,12 +66,13 @@ function getUniqueAppliances() {//pour appareils-list
 
 function getUniqueUstensils() {//ustensiles dans un sous tableau
 	const ustensils = new Set(recipes.map((recipe) => recipe.ustensils).flat());
-	console.log(ustensils)
+	
 	return Array.from(ustensils);
 }
 
 
 function displayList(items, containerId) {
+	//console.log("affichage de la liste pour container", containerId);
     const displayArea = document.getElementById(containerId);
     if (!displayArea) {
         console.error(`Le conteneur ${containerId} n'a pas été trouvé.`);
@@ -87,11 +90,12 @@ function displayList(items, containerId) {
         tag.classList.add("dropdown-item", "tag-style"); // Ajoutez 'tag-style' pour personnaliser l'apparence
         displayArea.appendChild(tag); // Ajout du tag
 
+		
         // Gestionnaire de clic sur le tag
         tag.addEventListener('click', function() {
            const searchInput = displayArea.closest('.dropdown').querySelector('.dropdown-search');
            searchInput.value = this.textContent; 
-           // toggleDropdown(displayArea.closest('.dropdown').classList[1]); 
+           //toggleDropdown(displayArea.closest('.dropdown').classList[1]); 
         });
     });
 }
