@@ -1,5 +1,6 @@
 
 //fonction pour masquer les drpdowns
+/*
 function toggleDropdown(buttonClass) {
 	const dropdown = document
 		.querySelector(`.${buttonClass}`)
@@ -95,7 +96,8 @@ function displayList(items, containerId) {
         tag.addEventListener('click', function() {
            const searchInput = displayArea.closest('.dropdown').querySelector('.dropdown-search');
            searchInput.value = this.textContent; 
-           //toggleDropdown(displayArea.closest('.dropdown').classList[1]); 
+			//toggleDropdown(displayArea.closest('.dropdown').classList[1]); 
+			console.log('Clicked tag text:', this.textContent);
         });
     });
 }
@@ -123,7 +125,7 @@ document.querySelectorAll('.dropdown-search').forEach(input => {
 
 
 
-
+*/
 
 
 

@@ -74,6 +74,7 @@ body {
 	justify-content: space-between;
 	align-items: baseline;
 	align-content: stretch;
+	
 }
 
 #recipes__cards {
@@ -271,3 +272,29 @@ h2 {
 	
 }
 
+#ingredients-dropdown{
+	height: 120px;
+	width: 200px;
+	border: solid red 6px;
+}
+
+
+.tags-ingredients{
+	columns: red;
+	width: 200px;
+	height: 100px;
+	background-color: red;
+}
+.tag-style{
+	
+	border: solid yellow 2px;
+}
+
+.tag-style:hover{
+	background-color: red;
+}
+
+.dropdown-search{
+	color: red;
+	background-color: blue;
+}

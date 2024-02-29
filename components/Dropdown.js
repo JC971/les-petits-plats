@@ -1,4 +1,5 @@
 //fonction pour masquer les drpdowns
+
 function toggleDropdown(buttonClass) {
 	const dropdown = document
 		.querySelector(`.${buttonClass}`)
@@ -12,6 +13,7 @@ function toggleDropdown(buttonClass) {
 	searchInput.style.display = isShown ? "none" : "block";
 	contentDiv.style.display = isShown ? "none" : "block";
 }
+
 
 export const displayDropdown = (recipes, filterAfterAddTag) => {
 	
@@ -79,14 +81,14 @@ function getUniqueIngredients(recipes) {
 	return Array.from(ingredients);
 }
 
-function getUniqueUstensils() {
+function getUniqueUstensils(recipes) {
 	//ustensiles dans un sous tableau
 	const ustensils = new Set(recipes.map((recipe) => recipe.ustensils).flat());
 
 	return Array.from(ustensils);
 }
 
-function getUniqueAppliances() {
+function getUniqueAppliances(recipes) {
 	//pour appareils-list
 	const appliances = new Set(recipes.map((recipe) => recipe.appliance));
 
@@ -118,21 +120,55 @@ function displayList(items, containerId, filterAfterAddTag) {
 			// TODO
 			// mettre à jour les dropdown
 
-			function updateDropdowns(recipes, filterAfterAddTag) {
-				updateIngredientsDropdowns(recipes, filterAfterAddTag);
-				updateAppliancesDropdown(recipes, filterAfterAddTag);
-				updadeUstensilsDropdown(recipes, filterAfterAddTag);
-			}
+function refreshDropdowns(filteredRecipes) {
+  // Calcule les nouveaux ensembles uniques pour chaque catégorie basée sur les recettes filtrées
+  const uniqueIngredients = getUniqueIngredients(filteredRecipes);
+  const uniqueAppliances = getUniqueAppliances(filteredRecipes);
+  const uniqueUstensils = getUniqueUstensils(filteredRecipes);
 
-			//mettre à jour le dropdown ingredients appliances et ustensils
-			//ingredients
-			function updateIngredientsDropdowns(recipes, filterAfterAddTag) {
-				const ingredients = getUniqueIngredients(recipes)
-				displayDropdown(ingredients,"ingredients-list", filterAfterAddTag)
-			}
+  // Met à jour l'affichage de chaque dropdown
+  displayList(uniqueIngredients, 'ingredients-list', filterAfterAddTag);
+  displayList(uniqueAppliances, 'appareils-list', filterAfterAddTag);
+  displayList(uniqueUstensils, 'ustensiles-list', filterAfterAddTag);
+}
+
 
 			// Manque la fonction pour ajouter un tag
+function addTag(value, type) {
+    let containerId;
+    switch(type) {
+        case "ingredients":
+            containerId = "tags-ingredients";
+            break;
+        case "appareils":
+            containerId = "tags-appliances";
+            break;
+        case "ustensiles":
+            containerId = "tags-ustensils";
+            break;
+        default:
+            console.error("Type de tag inconnu:", type);
+            return;
+    }
 
+    const container = document.getElementById(containerId);
+    if (container) {
+        const tagElement = document.createElement("div");
+        tagElement.textContent = value;
+        tagElement.className = "tag";
+        
+        // Optionnel : Bouton pour supprimer le tag
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "X";
+        deleteButton.onclick = () => tagElement.remove();
+        tagElement.appendChild(deleteButton);
+
+        container.appendChild(tagElement);
+    }
+}
+
+			
+///////////////////////////////////////////////
 			const dropdownContent = displayArea
 				.closest(".dropdown")
 				.querySelector(".dropdown-content");

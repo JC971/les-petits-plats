@@ -35,7 +35,7 @@ function updateRecipesCount(count) {
 }
 
 function searchRecipes(recipes) {
-  let results = filterRecipes({
+  let results = filterRecipes({ 
     recipes,
     searchAppareil,
     searchGlobal,
@@ -44,6 +44,9 @@ function searchRecipes(recipes) {
   });
   
   displayRecipes(results);
+  ////
+ 
+  return (results);
 }
 
 const searchByValue = (recipes) => {
@@ -57,37 +60,63 @@ const searchByValue = (recipes) => {
     }
   });
 };
-
+/*
 const filterAfterAddTag = (recipes) => {
   return (value, type) => {
     if (type === "ingredients") {
       searchIngredients.push(value);
+     
     }
     if (type === "appareils") {
       searchAppareil.push(value);
+      
+    }
+    if (type === "ustensiles") {
+      searchUstensils.push(value);
+      
+    }
+    searchRecipes(recipes);
+  };
+};*/
+const filterAfterAddTag = (recipes) => {
+  return async (value, type) => {
+    // Mise à jour des tableaux de filtres basés sur le type de tag
+    if (type === "ingredients") {
+      searchIngredients.push(value);
+    } else if (type === "appareils") {
+      searchAppareil.push(value);
+    } else if (type === "ustensiles") {
+      searchUstensils.push(value);
+    }
+    
+    // Filtre les recettes basées sur les critères de recherche mis à jour
+    let filteredRecipes = searchRecipes(recipes);
+      refreshDropdowns(filteredRecipes);
+    
+    // Rafraîchir les dropdowns avec les recettes filtrées
+    //refreshDropdowns(filteredRecipes);
+  };
+};
+
+
+const filterAfterRemoveTag = (recipes) => {
+  return (value, type) => {
+    if (type === "ingredients") {
+      //searchIngredients.filter((ingredient) => ingredient !== value);
+      searchIngredients = searchIngredients.filter(ingredient => ingredient !== value);
+    }
+    if (type === "appareils") {
+      //searchAppareil.filter((appareil) => appareil !== value);
+      searchAppareil = searchAppareil.filter(appareils => appareils !==value)
     }
     if (type === "ustensils") {
-      searchUstensils.push(value);
+      //searchUstensils.filter((ustensile) => ustensile !== value);
+        searchUstensils = searchUstensils.filter((ustensile) => ustensile !== value);
     }
     searchRecipes(recipes);
   };
 };
 
-/*
-const filterAfterRemoveTag = (recipes) => {
-  return (value, type) => {
-    if (type === "ingredients") {
-      searchIngredients.filter((ingredient) => ingredient !== value);
-    }
-    if (type === "appareils") {
-      searchAppareil.filter((appareil) => appareil !== value);
-    }
-    if (type === "ustensils") {
-      searchUstensils.filter((ustensile) => ustensile !== value);
-    }
-    searchRecipes(recipes);
-  };
-};*/
 
 const init = async () => {
   const { recipes } = await loadRecipes();
@@ -95,8 +124,8 @@ const init = async () => {
   searchByValue(recipes);
   displayDropdown(
     recipes,
-    filterAfterAddTag(recipes)
-    //,filterAfterRemoveTag(recipes)
+    filterAfterAddTag(recipes),
+    filterAfterRemoveTag(recipes)
     );
   };
   
