@@ -23,6 +23,7 @@ body {
 .header-logo {
 	padding: 20px 2px;
 }
+
 .header-search {
 	display: flex;
 	align-items: center;
@@ -74,7 +75,6 @@ body {
 	justify-content: space-between;
 	align-items: baseline;
 	align-content: stretch;
-	
 }
 
 #recipes__cards {
@@ -89,6 +89,7 @@ body {
 
 .recipe-image {
 	width: 100%;
+	position: relative;
 }
 /* place pour les photos  */
 .recipe-image img {
@@ -105,6 +106,7 @@ article {
 	margin-bottom: 60px;
 	height: 731px;
 	background-color: white;
+	position: relative;
 }
 
 h2 {
@@ -155,7 +157,6 @@ h2 {
 	margin-top: 0;
 	font-family: "Manrope", sans-serif;
 	list-style: none;
-
 }
 
 .ingredient-name {
@@ -197,7 +198,6 @@ h2 {
 	border-radius: 11px;
 	padding-left: 0;
 	padding-right: 0;
-	
 }
 
 /* boutons ingredients ... */
@@ -225,7 +225,6 @@ h2 {
 	color: #1b1b1b;
 	font-family: "Manrope", sans-serif;
 	font-size: 14px;
-
 }
 
 .dropdown-search {
@@ -243,7 +242,6 @@ h2 {
 	background-image: url(./img/LightCross.svg);
 	background-repeat: no-repeat;
 	background-position: right 10px center;
-	
 }
 
 .dropdown-content.show {
@@ -269,32 +267,50 @@ h2 {
 	font-size: 14px;
 	font-weight: 400;
 	padding-left: 16px;
-	
 }
 
-#ingredients-dropdown{
+#ingredients-dropdown {
 	height: 120px;
 	width: 200px;
 	border: solid red 6px;
 }
 
-
-.tags-ingredients{
-	columns: red;
-	width: 200px;
-	height: 100px;
-	background-color: red;
-}
-.tag-style{
-	
-	border: solid yellow 2px;
+.button-tag {
+	columns: yellow;
 }
 
-.tag-style:hover{
-	background-color: red;
+.tag-style {
+	border: solid red 1px;
 }
 
-.dropdown-search{
+.tag-style:hover {
+	background-color: #ffd15b;
+}
+
+.dropdown-search {
+	color: #000000;
+	padding-left: 8px;
+	color: black;
+}
+
+.tags {
+	height: 20px;
+	width: 120px;
 	color: red;
-	background-color: blue;
+}
+
+.recipe-time {
+	color: red;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background-color: #ffd15b;
+	width: 65px;
+	height: 26px;
+	text-align: center;
+	border-radius: 14px;
+	color: #1b1b1b;
+	font-weight: 400;
+	font-size: 12px;
+	padding-top:6px;
 }

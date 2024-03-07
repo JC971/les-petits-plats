@@ -8,4 +8,5 @@ export async function loadRecipes() {
   } catch (error) {
     console.error("Erreur lors du chargement des recettes:", error);
   }
+  
 }

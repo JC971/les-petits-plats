@@ -1,5 +1,5 @@
 export function getRecipeCard(data) {
-  const { id, image, name, servings, ingredients, description } = data;
+  const { id, image, name, servings, ingredients, description, time } = data;
 
   const article = document.createElement("article");
   article.setAttribute("id", `recipe-${id}`);
@@ -14,6 +14,12 @@ export function getRecipeCard(data) {
     blankImage.appendChild(imgElement);
   }
   article.appendChild(blankImage);
+
+   const timeElement = document.createElement("p");
+  timeElement.textContent = ` ${time} min`;
+  article.appendChild(timeElement);
+  timeElement.classList.add("recipe-time");
+
 
   const cardHeader = document.createElement("div");
   cardHeader.className = "card-header";
@@ -57,9 +63,8 @@ export function getRecipeCard(data) {
       detailsText += ingredient.unit ? ` ${ingredient.unit}` : "";
       detailsSpan.textContent = detailsText;
       item.appendChild(detailsSpan);
-      //console.log(detailsSpan);
+     
     }
-
     ingredientsList.appendChild(item);
   });
   article.appendChild(ingredientsList);

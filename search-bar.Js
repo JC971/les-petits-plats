@@ -3,6 +3,7 @@ export const getSearchBarValue = (callback) => {
 
   inputElement.addEventListener("input", function (event) {
     const value = event.target.value.trim().toLowerCase();
+  
     callback(value);
   });
 };

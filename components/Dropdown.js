@@ -1,22 +1,26 @@
-//fonction pour masquer les drpdowns
+document.addEventListener("DOMContentLoaded", function () {
+	console.log("DOMContentLoaded event fired.");
+	document.querySelectorAll(".dropdown-content").forEach((content) => {
+		content.addEventListener("click", function (event) {
+			if (event.target.classList.contains("dropdown-item")) {
+				const tagName = event.target.textContent;
 
-function toggleDropdown(buttonClass) {
-	const dropdown = document
-		.querySelector(`.${buttonClass}`)
-		.closest(".dropdown");
-	// atteindre la barre de recherche et le contenu
-	const searchInput = dropdown.querySelector(".dropdown-search");
-	const contentDiv = dropdown.querySelector(".dropdown-content");
+				addTagToSection(tagName);
+			}
+		});
+	});
+});
 
-	// Invisible/visible
-	const isShown = searchInput.style.display === "block";
-	searchInput.style.display = isShown ? "none" : "block";
-	contentDiv.style.display = isShown ? "none" : "block";
+function addTagToSection(tagName) {
+	console.log("addTagToSection called with tagName:", tagName);
+	const tagsSection = document.querySelector(".tags");
+	const tagElement = document.createElement("div");
+	tagElement.textContent = tagName;
+	tagElement.className = "tag";
+	tagsSection.appendChild(tagElement);
 }
 
-
 export const displayDropdown = (recipes, filterAfterAddTag) => {
-	
 	const dropdownActions = {
 		"ingredients-button": () =>
 			displayList(
@@ -38,7 +42,10 @@ export const displayDropdown = (recipes, filterAfterAddTag) => {
 			),
 	};
 
-	// Ajout des écouteurs d'événement pour chaque bouton
+	document.querySelectorAll(".dropdown-search").forEach((input) => {
+		input.addEventListener("input", filterDropdownTags);
+	});
+
 	document.querySelectorAll(".dropdown-button").forEach((button) => {
 		button.addEventListener("click", function () {
 			const buttonClass = this.classList[1];
@@ -46,19 +53,28 @@ export const displayDropdown = (recipes, filterAfterAddTag) => {
 			dropdownActions[buttonClass]?.();
 		});
 	});
-	//écouteur pour le dropdown-search
-	document.querySelectorAll(".dropdown-search").forEach((input) => {
-		input.addEventListener("input", filterDropdownTags);
-	});
 };
-//filtrage
+
+function toggleDropdown(buttonClass) {
+	const dropdown = document
+		.querySelector(`.${buttonClass}`)
+		.closest(".dropdown");
+	// atteindre la barre de recherche et le contenu
+	const searchInput = dropdown.querySelector(".dropdown-search");
+	const contentDiv = dropdown.querySelector(".dropdown-content");
+	// Invisible/visible
+	const isShown = searchInput.style.display === "block";
+	searchInput.style.display = isShown ? "none" : "block";
+	contentDiv.style.display = isShown ? "none" : "block";
+}
+
 function filterDropdownTags(event) {
 	const searchInput = event.target;
-	const filterText = searchInput.value.toLowerCase(); // Texte de filtrage
+	const filterText = searchInput.value.toLowerCase(); 
 	const dropdownContent = searchInput
 		.closest(".dropdown")
 		.querySelector(".dropdown-content");
-	//selection et iteration sur les tags
+	
 	dropdownContent.querySelectorAll(".dropdown-item").forEach((tag) => {
 		if (tag.textContent.toLowerCase().includes(filterText)) {
 			tag.style.display = ""; // Affiche le tag s'il correspond au texte filtré
@@ -66,6 +82,73 @@ function filterDropdownTags(event) {
 			tag.style.display = "none"; // Sinon, cache le tag
 		}
 	});
+}
+
+export function addTag(nameTag) {
+	
+	const tagElement = document.createElement("div");
+	tagElement.textContent = nameTag;
+	tagElement.className = "tag";
+
+	
+	const editButton = document.createElement("button");
+	editButton.textContent = "Edit";
+	editButton.className = "edit-button";
+
+	const deleteButton = document.createElement("button");
+	deleteButton.textContent = "Delete";
+	deleteButton.className = "delete-button";
+
+	// Ajout des écouteurs d'événements aux boutons
+	editButton.addEventListener("click", function () {
+		// Identifier l'élément de tag à éditer
+		const tagElement = this.parentNode; // ou autre méthode pour trouver l'élément de tag
+
+		// Demander à l'utilisateur de saisir la nouvelle valeur pour le tag
+		const newTagValue = prompt(
+			"Entrez la nouvelle valeur pour le tag:",
+			tagElement.textContent.trim()
+		);
+
+		// Vérifier si l'utilisateur a fourni une nouvelle valeur et si elle n'est pas vide
+		if (newTagValue !== null && newTagValue !== "") {
+			// Mettre à jour le contenu du tag avec la nouvelle valeur
+			tagElement.textContent = newTagValue.trim();
+
+			// Réagir en conséquence, par exemple, mettre à jour les données associées au tag
+			console.log(
+				"Le tag a été édité avec succès. Nouvelle valeur:",
+				newTagValue
+			);
+		} else {
+			// Gérer le cas où l'utilisateur a annulé l'édition ou n'a pas fourni de nouvelle valeur
+			console.log(
+				"L'édition du tag a été annulée ou aucune nouvelle valeur n'a été fournie."
+			);
+		}
+	});
+
+	// Ajout des boutons à l'élément de tag
+	tagElement.appendChild(editButton);
+	tagElement.appendChild(deleteButton);
+
+	// Sélection de la section où ajouter le tag
+	const tagsSection = document.querySelector(".tags");
+
+	// Ajout de l'élément de tag à la section
+	tagsSection.appendChild(tagElement);
+}
+
+
+export function refreshDropdowns(filteredRecipes, filterAfterAddTag) {
+	const uniqueIngredients = getUniqueIngredients(filteredRecipes);
+	const uniqueAppliances = getUniqueAppliances(filteredRecipes);
+	const uniqueUstensils = getUniqueUstensils(filteredRecipes);
+
+	// Met à jour l'affichage de chaque dropdown
+	displayList(uniqueIngredients, "ingredients-list", filterAfterAddTag);
+	displayList(uniqueAppliances, "appareils-list", filterAfterAddTag);
+	displayList(uniqueUstensils, "ustensiles-list", filterAfterAddTag);
 }
 
 function getUniqueIngredients(recipes) {
@@ -77,7 +160,6 @@ function getUniqueIngredients(recipes) {
 			)
 			.flat()
 	);
-
 	return Array.from(ingredients);
 }
 
@@ -97,78 +179,29 @@ function getUniqueAppliances(recipes) {
 
 function displayList(items, containerId, filterAfterAddTag) {
 	const displayArea = document.getElementById(containerId);
+
 	if (!displayArea) {
 		console.error(`Le conteneur ${containerId} n'a pas été trouvé.`);
+
 		return;
 	}
 
-	// Efface le contenu existant de la liste
 	displayArea.innerHTML = "";
-
 	items.forEach((item) => {
 		// Création d'un élément de tag dans une div
-		const tag = document.createElement("div");
-		tag.textContent = item; // Texte du tag
-		tag.classList.add("dropdown-item", "tag-style");
-		displayArea.appendChild(tag); // Ajout du tag
+		const element = document.createElement("div");
+		element.textContent = item; // Texte du tag
+		element.classList.add("dropdown-item", "tag-style");
+		displayArea.appendChild(element); // Ajout du element
 
-		tag.addEventListener("click", function () {
-			const value = this.textContent; // Valeur du tag cliqué
+		element.addEventListener("click", function () {
+			const value = this.textContent; // Valeur du element cliqué
 			const type = containerId.split("-")[0];
+			/////////////
 
 			filterAfterAddTag(value, type);
-			// TODO
-			// mettre à jour les dropdown
+			///////////////////////
 
-function refreshDropdowns(filteredRecipes) {
-  // Calcule les nouveaux ensembles uniques pour chaque catégorie basée sur les recettes filtrées
-  const uniqueIngredients = getUniqueIngredients(filteredRecipes);
-  const uniqueAppliances = getUniqueAppliances(filteredRecipes);
-  const uniqueUstensils = getUniqueUstensils(filteredRecipes);
-
-  // Met à jour l'affichage de chaque dropdown
-  displayList(uniqueIngredients, 'ingredients-list', filterAfterAddTag);
-  displayList(uniqueAppliances, 'appareils-list', filterAfterAddTag);
-  displayList(uniqueUstensils, 'ustensiles-list', filterAfterAddTag);
-}
-
-
-			// Manque la fonction pour ajouter un tag
-function addTag(value, type) {
-    let containerId;
-    switch(type) {
-        case "ingredients":
-            containerId = "tags-ingredients";
-            break;
-        case "appareils":
-            containerId = "tags-appliances";
-            break;
-        case "ustensiles":
-            containerId = "tags-ustensils";
-            break;
-        default:
-            console.error("Type de tag inconnu:", type);
-            return;
-    }
-
-    const container = document.getElementById(containerId);
-    if (container) {
-        const tagElement = document.createElement("div");
-        tagElement.textContent = value;
-        tagElement.className = "tag";
-        
-        // Optionnel : Bouton pour supprimer le tag
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "X";
-        deleteButton.onclick = () => tagElement.remove();
-        tagElement.appendChild(deleteButton);
-
-        container.appendChild(tagElement);
-    }
-}
-
-			
-///////////////////////////////////////////////
 			const dropdownContent = displayArea
 				.closest(".dropdown")
 				.querySelector(".dropdown-content");

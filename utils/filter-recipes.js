@@ -15,7 +15,7 @@ export const filterRecipes = ({
     );
 
     if (!ingredientsMatch) {
-      return false;//rien en commun
+      return false;
     }
 
     if (searchAppareil.length > 0) {
@@ -27,7 +27,7 @@ export const filterRecipes = ({
         return false;
       }
     }
-////////////////////////////////////
+
     if (searchUstensils.length > 0) {
      
       const ustensilMatch = searchUstensils.some((ustensil) =>
@@ -51,7 +51,7 @@ export const filterRecipes = ({
           .toLowerCase()
           .includes(searchGlobal.toLowerCase())
       ) ||
-      recipe.ustensils.some((ustensil) => // Ajouté pour inclure la vérification des ustensiles dans la recherche globale
+      recipe.ustensils.some((ustensil) => 
         ustensil.toLowerCase().includes(searchGlobal.toLowerCase())
       );
 
