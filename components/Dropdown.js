@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-	console.log("DOMContentLoaded event fired.");
 	document.querySelectorAll(".dropdown-content").forEach((content) => {
 		content.addEventListener("click", function (event) {
 			if (event.target.classList.contains("dropdown-item")) {
@@ -12,13 +11,26 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function addTagToSection(tagName) {
-	console.log("addTagToSection called with tagName:", tagName);
-	const tagsSection = document.querySelector(".tags");
-	const tagElement = document.createElement("div");
-	tagElement.textContent = tagName;
-	tagElement.className = "tag";
-	tagsSection.appendChild(tagElement);
+    console.log("addTagToSection called with tagName:", tagName);
+    const tagsSection = document.querySelector(".tags");
+    const tagElement = document.createElement("div");
+    tagElement.className = "tag";
+    
+    const tagText = document.createElement("span");
+    tagText.textContent = tagName;
+    tagElement.appendChild(tagText);
+
+    const closeButton = document.createElement("span");
+    closeButton.textContent = "×"; // Croix de fermeture
+    closeButton.className = "close-button";
+    closeButton.addEventListener("click", function() {
+        tagElement.remove(); 
+    });
+    tagElement.appendChild(closeButton);
+
+    tagsSection.appendChild(tagElement);
 }
+
 
 export const displayDropdown = (recipes, filterAfterAddTag) => {
 	const dropdownActions = {
@@ -101,16 +113,17 @@ export function addTag(nameTag) {
 
 	// Ajout des écouteurs d'événements aux boutons
 	editButton.addEventListener("click", function () {
-		// Identifier l'élément de tag à éditer
-		const tagElement = this.parentNode; // ou autre méthode pour trouver l'élément de tag
-
-		// Demander à l'utilisateur de saisir la nouvelle valeur pour le tag
+		
+		const tagElement = this.parentNode; 
+		
+		
 		const newTagValue = prompt(
 			"Entrez la nouvelle valeur pour le tag:",
 			tagElement.textContent.trim()
+		
 		);
 
-		// Vérifier si l'utilisateur a fourni une nouvelle valeur et si elle n'est pas vide
+	
 		if (newTagValue !== null && newTagValue !== "") {
 			// Mettre à jour le contenu du tag avec la nouvelle valeur
 			tagElement.textContent = newTagValue.trim();
@@ -144,7 +157,7 @@ export function refreshDropdowns(filteredRecipes, filterAfterAddTag) {
 	const uniqueIngredients = getUniqueIngredients(filteredRecipes);
 	const uniqueAppliances = getUniqueAppliances(filteredRecipes);
 	const uniqueUstensils = getUniqueUstensils(filteredRecipes);
-
+console.log({uniqueIngredients})
 	// Met à jour l'affichage de chaque dropdown
 	displayList(uniqueIngredients, "ingredients-list", filterAfterAddTag);
 	displayList(uniqueAppliances, "appareils-list", filterAfterAddTag);
@@ -156,7 +169,7 @@ function getUniqueIngredients(recipes) {
 	const ingredients = new Set(
 		recipes
 			.map((recipe) =>
-				recipe.ingredients.map((ingredient) => ingredient.ingredient)
+				recipe.ingredients.map((recipe) => recipe.ingredient)
 			)
 			.flat()
 	);
@@ -177,6 +190,46 @@ function getUniqueAppliances(recipes) {
 	return Array.from(appliances);
 }
 
+
+
+// Fonction pour rafraîchir les dropdowns avec les nouvelles données triées
+/*
+export function refreshDropdowns(filteredRecipes) {
+    const uniqueIngredients = getUniqueIngredients(filteredRecipes);
+    const uniqueAppliances = getUniqueAppliances(filteredRecipes);
+    const uniqueUstensils = getUniqueUstensils(filteredRecipes);
+
+    // Mettez à jour l'affichage de chaque dropdown avec les nouvelles données triées
+    displayList(uniqueIngredients, "ingredients-list", filterAfterAddTag);
+    displayList(uniqueAppliances, "appareils-list", filterAfterAddTag);
+    displayList(uniqueUstensils, "ustensiles-list", filterAfterAddTag);
+}*/
+
+
+// Fonction pour rechercher et afficher les recettes en fonction de la saisie de l'utilisateur
+/*
+const searchByValue = (recipes) => {
+    getSearchBarValue((inputValue) => {
+        searchGlobal = inputValue;
+
+        // Filtrez les recettes seulement si la saisie est valide
+        if (inputValue.length >= 3 || inputValue === "") {
+            let filteredRecipes = filterRecipes({
+                recipes,
+                searchGlobal,
+                searchAppareil,
+                searchIngredients,
+                searchUstensils,
+            });
+
+            displayRecipes(filteredRecipes);
+            refreshDropdowns(filteredRecipes); // Mettez à jour les dropdowns avec les nouvelles données triées
+        }
+    });
+};*/
+
+
+
 function displayList(items, containerId, filterAfterAddTag) {
 	const displayArea = document.getElementById(containerId);
 
@@ -185,8 +238,9 @@ function displayList(items, containerId, filterAfterAddTag) {
 
 		return;
 	}
-
+console.log({items})
 	displayArea.innerHTML = "";
+	console.log({ displayArea });
 	items.forEach((item) => {
 		// Création d'un élément de tag dans une div
 		const element = document.createElement("div");

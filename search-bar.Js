@@ -7,3 +7,4 @@ export const getSearchBarValue = (callback) => {
     callback(value);
   });
 };
+

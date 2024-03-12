@@ -15,10 +15,11 @@ function displayRecipes(recipes) {
   const recipesContainer = document.getElementById("recipes__cards");
   recipesContainer.innerHTML = ""; // Efface les recettes existantes avant d'afficher les nouvelles
   // Création et ajout des cartes de recettes au container
-  recipes.forEach((recipe) => {
+  for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i];
     const recipeCard = getRecipeCard(recipe);
     recipesContainer.appendChild(recipeCard);
-  });
+  }
   
   // aucun résultat trouvé
   const noResultText = document.querySelector(".no-result-text");
@@ -28,7 +29,6 @@ function displayRecipes(recipes) {
   
   refreshDropdowns(recipes, filterAfterAddTag);
 }
-////////////////////fin display recipes
 
 function updateRecipesCount(count) {
   const counterElement = document.getElementById("total-recipes"); // id html
@@ -36,8 +36,6 @@ function updateRecipesCount(count) {
     counterElement.textContent = `${count} recettes`;
   }
 }
-
-//////////////search recipes
 
 function searchRecipes(recipes) {
   let results = filterRecipes({
@@ -49,19 +47,15 @@ function searchRecipes(recipes) {
   });
   
   displayRecipes(results);
-  ////
-
-   refreshDropdowns(results, filterAfterAddTag);
+  
   return results;
 }
-
-////////barre de recherche
 
 const searchByValue = (recipes) => {
   getSearchBarValue((inputValue) => {
     searchGlobal = inputValue;
     
-    // Filtre les recettes seulement si ...
+    // Filtre les recettes seulement si la saisie est valide
     if (inputValue.length >= 3 || inputValue === "") {
       let filteredRecipes = filterRecipes({
         recipes,
@@ -92,8 +86,6 @@ const filterAfterAddTag = (recipes) => {
    
     let filteredRecipes = searchRecipes(recipes);
  
-    
-    // Rafraîchir les dropdowns avec les recettes filtrées filtered ou filter ?
     refreshDropdowns(filteredRecipes, filterAfterAddTag);
   };
 };
@@ -101,42 +93,35 @@ const filterAfterAddTag = (recipes) => {
 const filterAfterRemoveTag = (recipes) => {
   return (value, type) => {
     if (type === "ingredients") {
-  
       searchIngredients = searchIngredients.filter(
         (ingredient) => ingredient !== value
       );
       searchRecipes(recipes);
-      }
-      if (type === "appareils") {
-       
-        searchAppareil = searchAppareil.filter(
-          (appareils) => appareils !== value
-        );
-        searchRecipes(recipes);
-        }
-        if (type === "ustensils") {
-          
-          searchUstensils = searchUstensils.filter(
-            (ustensile) => ustensile !== value
-            );
-          }
-          searchRecipes(recipes);
-        };
-      };
-      
-      const init = async () => {
-        const { recipes } = await loadRecipes();
-        displayRecipes(recipes);
-        searchByValue(recipes);
-        displayDropdown(
-          recipes,
-          
-          filterAfterAddTag(recipes),
-          
-          filterAfterRemoveTag(recipes)
-          );
-        };
-        
+    }
+    if (type === "appareils") {
+      searchAppareil = searchAppareil.filter(
+        (appareils) => appareils !== value
+      );
+      searchRecipes(recipes);
+    }
+    if (type === "ustensils") {
+      searchUstensils = searchUstensils.filter(
+        (ustensile) => ustensile !== value
+      );
+      searchRecipes(recipes);
+    }
+  };
+};
+
+const init = async () => {
+  const { recipes } = await loadRecipes();
+  displayRecipes(recipes);
+  searchByValue(recipes);
+  displayDropdown(
+    recipes,
+    filterAfterAddTag(recipes),
+    filterAfterRemoveTag(recipes)
+  );
+};
+
 init();
-        
-  
