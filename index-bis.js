@@ -2,7 +2,7 @@ import { loadRecipes } from "./utils/get-recipes.js";
 import { getRecipeCard } from "./model/get-recipe-card.js";
 import { filterRecipes } from "./utils/filter-recipes.js";
 import { getSearchBarValue } from "./search-bar.Js";
-import { displayDropdown, refreshDropdowns } from "./components/Dropdown.js";
+import { displayDropdown, refreshDropdowns } from "./components/Dropdown-bis.js";
 
 // Déclaration de la variable pour stocker les recettes
 let searchGlobal = "";
@@ -13,8 +13,8 @@ let searchAppareil = [];
 // Fonction pour afficher les recettes vers recipes__cards
 function displayRecipes(recipes) {
   const recipesContainer = document.getElementById("recipes__cards");
-  recipesContainer.innerHTML = ""; // Efface les recettes existantes avant d'afficher les nouvelles
-  // Création et ajout des cartes de recettes au container
+  recipesContainer.innerHTML = "";
+  
   for (let i = 0; i < recipes.length; i++) {
     const recipe = recipes[i];
     const recipeCard = getRecipeCard(recipe);
@@ -74,7 +74,7 @@ const searchByValue = (recipes) => {
 
 const filterAfterAddTag = (recipes) => {
   return async (value, type) => {
-    // Mise à jour des tableaux de filtres basés sur le type de tag
+   
     if (type === "ingredients") {
       searchIngredients.push(value);
     } else if (type === "appareils") {
