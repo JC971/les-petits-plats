@@ -1,155 +1,138 @@
-document.addEventListener("DOMContentLoaded", function () {
-	const dropdownContents = document.querySelectorAll(".dropdown-content");
-	for (let i = 0; i < dropdownContents.length; i++) {
-		dropdownContents[i].addEventListener("click", function (event) {
-			if (event.target.classList.contains("dropdown-item")) {
-				const tagName = event.target.textContent;
-				addTagToSection(tagName);
-			}
-		});
-	}
+function addTagToSection(tagName, type, remove) {
+    const tagsSection = document.querySelector(".tags");
+    const tagElement = document.createElement("div");
+    tagElement.className = "tag";
 
-	const dropdownButtons = document.querySelectorAll(".dropdown-button");
-	for (let i = 0; i < dropdownButtons.length; i++) {
-		dropdownButtons[i].addEventListener("click", function () {
-			const buttonClass = this.classList[1];
-			toggleDropdown(buttonClass);
-			dropdownActions[buttonClass]?.();
-		});
-	}
+    const tagText = document.createElement("span");
+    tagText.textContent = tagName;
+    tagElement.appendChild(tagText);
 
-	const dropdownSearches = document.querySelectorAll(".dropdown-search");
-	for (let i = 0; i < dropdownSearches.length; i++) {
-		dropdownSearches[i].addEventListener("input", filterDropdownTags);
-	}
-});
+    const closeButton = document.createElement("span");
+    closeButton.textContent = "×"; // Croix de fermeture
+    closeButton.className = "close-button";
+    closeButton.addEventListener("click", function () {
+        remove(tagName, type);
+        tagElement.remove();
+
+        //fermeture dropdown-search en meme tps tag
+        const searchInputs = document.querySelectorAll(".dropdown-search");
+        for (let i = 0; i < searchInputs.length; i++) {
+            searchInputs[i].style.display = "none";
+        }
+    });
+    tagElement.appendChild(closeButton);
+
+    tagsSection.appendChild(tagElement);
+}
+
+export const displayDropdown = (recipes, filterAfterAddTag, remove) => {
+    console.log("display dropdown");
+    document.getElementById("ingredients-list").innerHTML = "";
+
+    const dropdowns = [
+        { id: "ingredients-list", items: getUniqueIngredients(recipes) },
+        { id: "appareils-list", items: getUniqueAppliances(recipes) },
+        { id: "ustensiles-list", items: getUniqueUstensils(recipes) }
+    ];
+
+    for (let i = 0; i < dropdowns.length; i++) {
+        const { id, items } = dropdowns[i];
+        displayList(items, id, filterAfterAddTag, remove);
+    }
+
+    const searchInputs = document.querySelectorAll(".dropdown-search");
+    for (let i = 0; i < searchInputs.length; i++) {
+        searchInputs[i].addEventListener("input", filterDropdownTags);
+    }
+
+    const buttons = document.querySelectorAll(".dropdown-button");
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener("click", function () {
+            const buttonClass = this.classList[1];
+            toggleDropdown(buttonClass);
+        });
+    }
+};
 
 function toggleDropdown(buttonClass) {
-	const dropdownButton = document.querySelector(`.${buttonClass}`);
-	const dropdown = dropdownButton.closest(".dropdown");
-	const searchInput = dropdown.querySelector(".dropdown-search");
-	const contentDiv = dropdown.querySelector(".dropdown-content");
-	const isShown = searchInput.style.display === "block";
-	searchInput.style.display = isShown ? "none" : "block";
-	contentDiv.style.display = isShown ? "none" : "block";
+    const dropdown = document
+        .querySelector(`.${buttonClass}`)
+        .closest(".dropdown");
+    const searchInput = dropdown.querySelector(".dropdown-search");
+    const contentDiv = dropdown.querySelector(".dropdown-content");
+    const isShown = searchInput.style.display === "block";
+
+    searchInput.style.display = isShown ? "none" : "block";
+    contentDiv.style.display = isShown ? "none" : "block";
 }
 
 function filterDropdownTags(event) {
-	const searchInput = event.target;
-	const filterText = searchInput.value.toLowerCase();
-	const dropdownContent = searchInput
-		.closest(".dropdown")
-		.querySelector(".dropdown-content");
+    const searchInput = event.target;
+    const filterText = searchInput.value.toLowerCase();
+    const dropdownContent = searchInput
+        .closest(".dropdown")
+        .querySelector(".dropdown-content");
 
-	const dropdownItems = dropdownContent.querySelectorAll(".dropdown-item");
-	for (let i = 0; i < dropdownItems.length; i++) {
-		const tag = dropdownItems[i];
-		if (tag.textContent.toLowerCase().includes(filterText)) {
-			tag.style.display = "";
-		} else {
-			tag.style.display = "none";
-		}
-	}
-}
-
-export function addTag(nameTag) {
-	const tagElement = document.createElement("div");
-	tagElement.textContent = nameTag;
-	tagElement.className = "tag";
-
-	const editButton = document.createElement("button");
-	editButton.textContent = "Edit";
-	editButton.className = "edit-button";
-
-	const deleteButton = document.createElement("button");
-	deleteButton.textContent = "Delete";
-	deleteButton.className = "delete-button";
-
-	editButton.addEventListener("click", function () {
-		const tagElement = this.parentNode;
-		const newTagValue = prompt(
-			tagElement.textContent.trim()
-		);
-
-		if (newTagValue !== null && newTagValue !== "") {
-			tagElement.textContent = newTagValue.trim();
-		}
-	});
-
-	tagElement.appendChild(editButton);
-	tagElement.appendChild(deleteButton);
-
-	const tagsSection = document.querySelector(".tags");
-	tagsSection.appendChild(tagElement);
+    const tags = dropdownContent.querySelectorAll(".dropdown-item");
+    for (let i = 0; i < tags.length; i++) {
+        const tag = tags[i];
+        tag.style.display = tag.textContent.toLowerCase().includes(filterText) ? "" : "none";
+    }
 }
 
 export function refreshDropdowns(filteredRecipes, filterAfterAddTag) {
-	const uniqueIngredients = getUniqueIngredients(filteredRecipes);
-	const uniqueAppliances = getUniqueAppliances(filteredRecipes);
-	const uniqueUstensils = getUniqueUstensils(filteredRecipes);
+    const dropdowns = [
+        { id: "ingredients-list", items: getUniqueIngredients(filteredRecipes) },
+        { id: "appareils-list", items: getUniqueAppliances(filteredRecipes) },
+        { id: "ustensiles-list", items: getUniqueUstensils(filteredRecipes) }
+    ];
 
-	displayList(uniqueIngredients, "ingredients-list", filterAfterAddTag);
-	displayList(uniqueAppliances, "appareils-list", filterAfterAddTag);
-	displayList(uniqueUstensils, "ustensiles-list", filterAfterAddTag);
+    for (let i = 0; i < dropdowns.length; i++) {
+        const { id, items } = dropdowns[i];
+        displayList(items, id, filterAfterAddTag);
+    }
 }
 
 function getUniqueIngredients(recipes) {
-	const ingredientsSet = new Set();
-	for (let i = 0; i < recipes.length; i++) {
-		const recipe = recipes[i];
-		for (let j = 0; j < recipe.ingredients.length; j++) {
-			const ingredient = recipe.ingredients[j].ingredient;
-			ingredientsSet.add(ingredient);
-		}
-	}
-	return Array.from(ingredientsSet);
+    const ingredients = new Set(
+        recipes.flatMap((recipe) => recipe.ingredients.map((recipe) => recipe.ingredient))
+    );
+    return Array.from(ingredients);
 }
 
 function getUniqueUstensils(recipes) {
-	const ustensilsSet = new Set();
-	for (let i = 0; i < recipes.length; i++) {
-		const recipe = recipes[i];
-		for (let j = 0; j < recipe.ustensils.length; j++) {
-			const ustensil = recipe.ustensils[j];
-			ustensilsSet.add(ustensil);
-		}
-	}
-	return Array.from(ustensilsSet);
+    const ustensils = new Set(recipes.flatMap((recipe) => recipe.ustensils).flat());
+    return Array.from(ustensils);
 }
 
 function getUniqueAppliances(recipes) {
-	const appliancesSet = new Set();
-	for (let i = 0; i < recipes.length; i++) {
-		const recipe = recipes[i];
-		appliancesSet.add(recipe.appliance);
-	}
-	return Array.from(appliancesSet);
+    const appliances = new Set(recipes.map((recipe) => recipe.appliance));
+    return Array.from(appliances);
 }
 
-function displayList(items, containerId, filterAfterAddTag) {
-	const displayArea = document.getElementById(containerId);
+function displayList(items, containerId, filterAfterAddTag, remove) {
+    const displayArea = document.getElementById(containerId);
 
-	if (!displayArea) {
-		console.error(`Le conteneur ${containerId} n'a pas été trouvé.`);
-		return;
-	}
+    if (!displayArea) {
+        console.error(`Le conteneur ${containerId} n'a pas été trouvé.`);
+        return;
+    }
 
-	displayArea.innerHTML = "";
-	for (let i = 0; i < items.length; i++) {
-		const item = items[i];
-		const element = document.createElement("div");
-		element.textContent = item;
-		element.classList.add("dropdown-item", "tag-style");
-		displayArea.appendChild(element);
+    displayArea.innerHTML = "";
 
-		element.addEventListener("click", function () {
-			const value = this.textContent;
-			const type = containerId.split("-")[0];
-			filterAfterAddTag(value, type);
-			const dropdownContent = displayArea
-				.closest(".dropdown")
-				.querySelector(".dropdown-content");
-			dropdownContent.style.display = "none";
-		});
-	}
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        const element = document.createElement("div");
+        element.textContent = item;
+        element.classList.add("dropdown-item", "tag-style");
+        displayArea.appendChild(element);
+
+        element.addEventListener("click", function () {
+            const value = this.textContent;
+            const type = containerId.split("-")[0];
+            addTagToSection(value, type, remove);
+            filterAfterAddTag(value, type);
+            displayArea.closest(".dropdown").querySelector(".dropdown-content").style.display = "none";
+        });
+    }
 }

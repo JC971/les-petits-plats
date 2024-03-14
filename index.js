@@ -50,8 +50,8 @@ function searchRecipes(recipes) {
   
   displayRecipes(results);
   ////
-
-   refreshDropdowns(results, filterAfterAddTag);
+  
+  refreshDropdowns(results, filterAfterAddTag);
   return results;
 }
 
@@ -89,9 +89,9 @@ const filterAfterAddTag = (recipes) => {
       searchUstensils.push(value);
     }
     
-   
+    
     let filteredRecipes = searchRecipes(recipes);
- 
+    
     
     // Rafraîchir les dropdowns avec les recettes filtrées filtered ou filter ?
     refreshDropdowns(filteredRecipes, filterAfterAddTag);
@@ -101,18 +101,18 @@ const filterAfterAddTag = (recipes) => {
 const filterAfterRemoveTag = (recipes) => {
   return (value, type) => {
     if (type === "ingredients") {
-  
+      
       searchIngredients = searchIngredients.filter(
         (ingredient) => ingredient !== value
-      );
-      searchRecipes(recipes);
+        );
+        
       }
       if (type === "appareils") {
-       
+        
         searchAppareil = searchAppareil.filter(
           (appareils) => appareils !== value
-        );
-        searchRecipes(recipes);
+          );
+          
         }
         if (type === "ustensils") {
           
@@ -122,6 +122,7 @@ const filterAfterRemoveTag = (recipes) => {
           }
           searchRecipes(recipes);
         };
+        
       };
       
       const init = async () => {
@@ -137,6 +138,6 @@ const filterAfterRemoveTag = (recipes) => {
           );
         };
         
-init();
+        init();
         
-  
+        
