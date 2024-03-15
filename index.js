@@ -2,7 +2,7 @@ import { loadRecipes } from "./utils/get-recipes.js";
 import { getRecipeCard } from "./model/get-recipe-card.js";
 import { filterRecipes } from "./utils/filter-recipes.js";
 import { getSearchBarValue } from "./search-bar.Js";
-import { displayDropdown, refreshDropdowns } from "./components/Dropdown-bis.js";
+import { displayDropdown, refreshDropdowns } from "./components/Dropdown.js";
 
 // Déclaration de la variable pour stocker les recettes
 let searchGlobal = "";
@@ -55,7 +55,8 @@ const searchByValue = (recipes) => {
   getSearchBarValue((inputValue) => {
     searchGlobal = inputValue;
     
-    // Filtre les recettes seulement si la saisie est valide
+
+
     if (inputValue.length >= 3 || inputValue === "") {
       let filteredRecipes = filterRecipes({
         recipes,

@@ -8,7 +8,7 @@ function addTagToSection(tagName, type, remove) {
     tagElement.appendChild(tagText);
 
     const closeButton = document.createElement("span");
-    closeButton.textContent = "×"; // Croix de fermeture
+    closeButton.textContent = "×"; //fermeture tag
     closeButton.className = "close-button";
     closeButton.addEventListener("click", function () {
         remove(tagName, type);
@@ -26,7 +26,7 @@ function addTagToSection(tagName, type, remove) {
 }
 
 export const displayDropdown = (recipes, filterAfterAddTag, remove) => {
-    console.log("display dropdown");
+
     document.getElementById("ingredients-list").innerHTML = "";
 
     const dropdowns = [
