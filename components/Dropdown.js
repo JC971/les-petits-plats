@@ -36,7 +36,6 @@ function addTagToSection(tagName, type, remove) {
 }
 
 export const displayDropdown = (recipes, filterAfterAddTag, remove) => {
-	console.log("display dropdown");
 	document.getElementById("ingredients-list").innerHTML = "";
 
 	displayList(
@@ -61,13 +60,28 @@ export const displayDropdown = (recipes, filterAfterAddTag, remove) => {
 	document.querySelectorAll(".dropdown-search").forEach((input) => {
 		input.addEventListener("input", filterDropdownTags);
 	});
-
+	
+let isSecondImageVisible = false; 
 	document.querySelectorAll(".dropdown-button").forEach((button) => {
 		button.addEventListener("click", function () {
 			const buttonClass = this.classList[1];
-			toggleDropdown(buttonClass);
+            toggleDropdown(buttonClass);
+            
+            const images = this.querySelectorAll("img");
+        const firstImage = images[0];
+        const secondImage = images[1];
+
+        isSecondImageVisible = !isSecondImageVisible;
+        if (isSecondImageVisible) {
+            firstImage.style.display = "none";
+            secondImage.style.display = "inline-block";
+        } else {
+            firstImage.style.display = "inline-block";
+            secondImage.style.display = "none";
+        }
 		});
 	});
+    
 };
 
 function toggleDropdown(buttonClass) {
@@ -105,7 +119,7 @@ export function refreshDropdowns(filteredRecipes, filterAfterAddTag) {
 	const uniqueIngredients = getUniqueIngredients(filteredRecipes);
 	const uniqueAppliances = getUniqueAppliances(filteredRecipes);
 	const uniqueUstensils = getUniqueUstensils(filteredRecipes);
-	console.log({ uniqueIngredients });
+
 	// Met à jour l'affichage de chaque dropdown
 	displayList(uniqueIngredients, "ingredients-list", filterAfterAddTag);
 	displayList(uniqueAppliances, "appareils-list", filterAfterAddTag);
@@ -146,9 +160,7 @@ function displayList(items, containerId, filterAfterAddTag, remove) {
 
 		return;
 	}
-	console.log({ items });
 	displayArea.innerHTML = "";
-	console.log({ displayArea });
 	items.forEach((item) => {
 		// Création d'un élément de tag dans une div
 		const element = document.createElement("div");
@@ -159,10 +171,10 @@ function displayList(items, containerId, filterAfterAddTag, remove) {
 		element.addEventListener("click", function () {
 			const value = this.textContent; // Valeur du element cliqué
 			const type = containerId.split("-")[0];
-			/////////////
+		
 			addTagToSection(value, type, remove);
 			filterAfterAddTag(value, type);
-			///////////////////////
+			
 
 			const dropdownContent = displayArea
 				.closest(".dropdown")

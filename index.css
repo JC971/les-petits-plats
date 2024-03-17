@@ -339,10 +339,12 @@ h2 {
 	font-family: "Manrope", sans-serif;
 	line-height: 53px;
 	display: flex;
-	justify-content: center;
 	position: relative;
-	margin-top: 10px;
+	
+}
 
+span{
+	padding-left: 10px;
 }
 
 .close-button {
@@ -350,6 +352,10 @@ h2 {
 	cursor: pointer; 
 	position: absolute;
 	right: 10px;
-	top: -2px;
+	padding-left: 20px;
+}
+
+.chevron{
+	display: none;
 }
 
