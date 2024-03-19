@@ -10,7 +10,7 @@ export const filterRecipes = ({
 
     // Vérifie si tous les ingrédients recherchés sont présents dans la recette
     if (searchIngredients.length > 0) {
-      for (let ingredient of searchIngredients) {
+      for (let ingredient of searchIngredients) {///for of!!!!!
         let ingredientFound = false;
         for (let recipeIngredient of recipe.ingredients) {
           if (recipeIngredient.ingredient.toLowerCase() === ingredient.toLowerCase()) {
@@ -32,7 +32,7 @@ export const filterRecipes = ({
     // Vérifie si au moins un appareil recherché correspond à l'appareil de la recette
     if (searchAppareil.length > 0) {
       let appareilMatch = false;
-      for (let appareil of searchAppareil) {
+      for (let appareil of searchAppareil) {////!!!!!
         if (recipe.appliance.toLowerCase().includes(appareil.toLowerCase())) {
           appareilMatch = true;
           break;
@@ -46,7 +46,7 @@ export const filterRecipes = ({
     // Vérifie si au moins un ustensile recherché est présent dans la recette
     if (searchUstensils.length > 0) {
       let ustensilMatch = false;
-      for (let ustensil of searchUstensils) {
+      for (let ustensil of searchUstensils) {///////!!!!!!!!!!!
         for (let recipeUstensil of recipe.ustensils) {
           if (recipeUstensil.toLowerCase().includes(ustensil.toLowerCase())) {
             ustensilMatch = true;

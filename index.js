@@ -93,6 +93,7 @@ const filterAfterAddTag = (recipes) => {
 
 const filterAfterRemoveTag = (recipes) => {
   return (value, type) => {
+    console.log({value, type})
     if (type === "ingredients") {
       searchIngredients = searchIngredients.filter(
         (ingredient) => ingredient !== value
@@ -105,7 +106,7 @@ const filterAfterRemoveTag = (recipes) => {
       );
       searchRecipes(recipes);
     }
-    if (type === "ustensils") {
+    if (type === "ustensiles") {
       searchUstensils = searchUstensils.filter(
         (ustensile) => ustensile !== value
       );
