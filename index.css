@@ -316,10 +316,11 @@ h2 {
 }
 
 .tags {
-	width: 120px;
-	color: red;
+	
+	
 	margin: 20px 0 0 50px;
 	width: 141px;
+
 
 	display: flex;
 	flex-direction: row;
@@ -329,20 +330,28 @@ h2 {
 
 .tag {
 	background-color: #ffd15b;
-	width: 100%;
+	min-width: 100%;
 	height: 53px;
 	border-radius: 10px;
-	text-align: center;
+	padding-left: 8px;
 	color: #000000;
 	font-size: 14px;
 	font-weight: 400;
 	font-family: "Manrope", sans-serif;
 	line-height: 53px;
-	display: flex;
-	justify-content: center;
+display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+	align-items: start;
 	position: relative;
 	margin-top: 10px;
 
+}
+span{
+	
 }
 
 .close-button {

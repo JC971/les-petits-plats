@@ -5,19 +5,24 @@ export const filterRecipes = ({
   searchAppareil,
   searchUstensils
 }) => {
+  
   return recipes.filter((recipe) => {
     let ingredientsMatch = true;
 
     // Vérifie si tous les ingrédients recherchés sont présents dans la recette
     if (searchIngredients.length > 0) {
-      for (let ingredient of searchIngredients) {///for of!!!!!
+     
+
+      for (let i = 0; i < searchIngredients.length; i++) {
         let ingredientFound = false;
-        for (let recipeIngredient of recipe.ingredients) {
-          if (recipeIngredient.ingredient.toLowerCase() === ingredient.toLowerCase()) {
+       
+        for (let j = 0; j < recipe.ingredients.length; j++) {
+          if (recipe.ingredients[j].ingredient.toLowerCase() === searchIngredients[i].toLowerCase()) {
             ingredientFound = true;
             break;
           }
         }
+      
         if (!ingredientFound) {
           ingredientsMatch = false;
           break;
@@ -32,8 +37,8 @@ export const filterRecipes = ({
     // Vérifie si au moins un appareil recherché correspond à l'appareil de la recette
     if (searchAppareil.length > 0) {
       let appareilMatch = false;
-      for (let appareil of searchAppareil) {////!!!!!
-        if (recipe.appliance.toLowerCase().includes(appareil.toLowerCase())) {
+      for (let i = 0; i < searchAppareil.length; i++) {
+        if (recipe.appliance.toLowerCase().includes(searchAppareil[i].toLowerCase())) {
           appareilMatch = true;
           break;
         }
@@ -46,9 +51,9 @@ export const filterRecipes = ({
     // Vérifie si au moins un ustensile recherché est présent dans la recette
     if (searchUstensils.length > 0) {
       let ustensilMatch = false;
-      for (let ustensil of searchUstensils) {///////!!!!!!!!!!!
-        for (let recipeUstensil of recipe.ustensils) {
-          if (recipeUstensil.toLowerCase().includes(ustensil.toLowerCase())) {
+      for (let i = 0; i < searchUstensils.length; i++) {///////!!!!!!!!!!!
+        for (let j = 0; j < recipe.ustensils.length; j++) {
+          if (recipe.ustensils[j].toLowerCase().includes(searchUstensils[i].toLowerCase())) {
             ustensilMatch = true;
             break;
           }

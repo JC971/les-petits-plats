@@ -1,3 +1,5 @@
+
+
 export const getSearchBarValue = (callback) => {
 	const inputElement = document.querySelector('input[type="text"]');
 
