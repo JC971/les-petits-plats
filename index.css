@@ -193,7 +193,14 @@ h2 {
 .dropdown {
 	position: relative;
 	display: inline-block;
-	width: 195px;
+	width: 300px;
+
+	
+
+}
+ul{
+	max-height: 325px;
+	overflow-x: auto;
 
 }
 
@@ -232,7 +239,7 @@ h2 {
 	width: 179px;
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 	z-index: 1;
-	padding: 80px 0px;
+	padding: 60px 0px;
 	color: #1b1b1b;
 	font-family: "Manrope", sans-serif;
 	font-size: 14px;
@@ -242,21 +249,25 @@ h2 {
 	width: 169px;
 	padding: 10px 0 00 px;
 	padding: 0;
-	border: solid 1px grey;
+	border: solid 1px #7A7A7A;
 	height: 40px;
 	position: absolute;
 	top: 80px;
 	left: 50px;
 	display: none;
 	z-index: 12;
-	margin: 5px;
 	background-image: url(./img/LightCross.svg);
 	background-repeat: no-repeat;
 	background-position: right 10px center;
 }
 
+input.dropdown-search{
+	border: solid 0.01px #7A7A7A;
+}
+
 .dropdown-content.show {
 	display: block;
+	
 }
 
 .dropdown-item {
@@ -281,7 +292,6 @@ h2 {
 }
 
 
-
 .tag-style {
 	font-size: 14px;
 	font-weight: 400;
@@ -296,11 +306,11 @@ h2 {
 .dropdown-search {
 	color: #000000;
 	padding-left: 8px;
-	color: black;
+	
 }
 
 .recipe-time {
-	color: red;
+	
 	position: absolute;
 	top: 10px;
 	right: 10px;
@@ -316,43 +326,36 @@ h2 {
 }
 
 .tags {
-	width: 120px;
-	color: red;
 	margin: 20px 0 0 50px;
-	width: 141px;
-
 	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+	flex-direction: column;
+	flex-wrap: nowrap;
 	gap: 10px;
-}
-
-.tag {
-	background-color: #ffd15b;
-	width: 100%;
-	height: 53px;
-	border-radius: 10px;
-	text-align: center;
-	color: #000000;
-	font-size: 14px;
-	font-weight: 400;
-	font-family: "Manrope", sans-serif;
-	line-height: 53px;
-	display: flex;
-	position: relative;
+	width: 10%;
 	
 }
 
-span{
-	padding-left: 10px;
+.tag {
+    background-color: #ffd15b;
+    height: 53px;
+    border-radius: 10px;
+    color: #000000;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: "Manrope", sans-serif;
+    line-height: 53px;
+    width: 203px;
+    position: relative;
+    padding-left: 10px; /* Décalage de 10px vers la droite */
 }
 
 .close-button {
 	font-size:26px; 
 	cursor: pointer; 
+	width: 15px;
+	padding-right: 8px;
 	position: absolute;
-	right: 10px;
-	padding-left: 20px;
+	right: 8px;
 }
 
 .chevron{
