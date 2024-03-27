@@ -223,7 +223,6 @@ ul.dropdown-content {
 	cursor: pointer;
 	z-index: 10;
 }
-
 /*contenu de mes dropdowns*/
 .dropdown-content {
 	display: none;
@@ -288,13 +287,30 @@ input.dropdown-search {
 	font-weight: 400;
 	padding-left: 16px;
 	color: #1b1b1b;
+	position: relative; 
 }
 
-.tag-style:hover {
+.tag-style:hover{
 	background-color: #ffd15b;
 }
 
+.tag-style:active {
+	background-color: #ffd15b;
+	transition: all 0.3s ease;
+}
 
+.tag-style:active::after {
+	content: "";
+	position: absolute; 
+	right: 10px; 
+	top: 50%; 
+	transform: translateY(-50%); 
+	width: 20px; 
+	height: 20px; 
+	background-image: url(./img/croix-entourée.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+}
 
 .recipe-time {
 	position: absolute;

@@ -182,7 +182,7 @@ function displayList(
 		displayArea.appendChild(element); // Ajout du element
 
 		element.addEventListener("click", function () {
-			const value = this.textContent; // Valeur du element cliqué
+			const value = this.textContent; // Valeur de l' element cliqué
 			const type = containerId.split("-")[0];
 
 			addTagToSection(value, type, filterAfterRemoveTag);
@@ -192,6 +192,8 @@ function displayList(
 				.closest(".dropdown")
 				.querySelector(".dropdown-content");
 			dropdownContent.style.display = "none"; // ne plus afficher la liste
+	
 		});
+		
 	});
 }
