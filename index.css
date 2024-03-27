@@ -27,7 +27,6 @@ body {
 .header-search {
 	display: flex;
 	align-items: center;
-
 }
 
 .header-search input[type="text"] {
@@ -39,20 +38,17 @@ body {
 	background-image: url(./img/Loop\ CTA.svg);
 	background-repeat: no-repeat;
 	background-position: right 10px center;
-	color: #7A7A7A;
+	color: #7a7a7a;
 	font-size: 16px;
 	font-weight: 400;
 	font-family: "Manrope", sans-serif;
 	padding-left: 35px;
 }
 
-
 .header-search ::placeholder {
 	color: #7a7a7a;
 	font-size: 16px;
 	font-weight: 400;
-	
-	
 }
 
 .logo {
@@ -131,7 +127,7 @@ h2 {
 	font-size: 21px;
 	font-weight: 400;
 	color: #1b1b1b;
-	margin-right:20px;
+	margin-right: 20px;
 	width: 250px;
 }
 
@@ -196,16 +192,10 @@ h2 {
 	width: 300px;
 }
 
-ul{
-
-}
-ul.dropdown-content{
-	
-		max-height:340px;
+ul.dropdown-content {
+	max-height: 340px;
 	overflow-x: auto;
-display: flex;
 	padding-right: 0;
-	
 }
 
 .dropdown-button {
@@ -249,7 +239,6 @@ display: flex;
 	color: #1b1b1b;
 	font-family: "Manrope", sans-serif;
 	font-size: 14px;
-	
 }
 
 .dropdown-search {
@@ -266,23 +255,17 @@ display: flex;
 	background-position: right 10px center;
 	margin-right: auto;
 	margin-left: auto;
-	
 }
 
-input.dropdown-search{
+input.dropdown-search {
 	width: 160px;
 	height: 36px;
-border: solid #C6C6C6 1px;
-margin-left: 15px;
-
-
+	border: solid #c6c6c6 1px;
+	margin-left: 15px;
 }
-
 
 .dropdown-content.show {
 	display: block;
-
-	
 }
 
 .dropdown-item {
@@ -304,13 +287,14 @@ margin-left: 15px;
 	font-size: 14px;
 	font-weight: 400;
 	padding-left: 16px;
-	color: #1B1B1B;
-
+	color: #1b1b1b;
 }
 
 .tag-style:hover {
 	background-color: #ffd15b;
 }
+
+
 
 .recipe-time {
 	position: absolute;
@@ -337,29 +321,28 @@ margin-left: 15px;
 }
 
 .tag {
-    background-color: #ffd15b;
-    height: 53px;
-    border-radius: 10px;
-    color: #000000;
-    font-size: 14px;
-    font-weight: 400;
-    font-family: "Manrope", sans-serif;
-    line-height: 53px;
-    width: 203px;
-    position: relative;
-    padding-left: 10px; /* Décalage de 10px vers la droite */
+	background-color: #ffd15b;
+	height: 53px;
+	border-radius: 10px;
+	color: #000000;
+	font-size: 14px;
+	font-weight: 400;
+	font-family: "Manrope", sans-serif;
+	line-height: 53px;
+	width: 203px;
+	position: relative;
+	padding-left: 10px; /* Décalage de 10px vers la droite */
 }
 
 .close-button {
-	font-size:26px; 
-	cursor: pointer; 
+	font-size: 26px;
+	cursor: pointer;
 	width: 15px;
 	padding-right: 8px;
 	position: absolute;
 	right: 8px;
 }
 
-.chevron{
+.chevron {
 	display: none;
 }
-
