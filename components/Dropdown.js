@@ -102,7 +102,7 @@ function filterDropdownTags(event) {
 		if (tag.textContent.toLowerCase().includes(filterText)) {
 			tag.style.display = ""; // Affiche le tag s'il correspond au texte filtré
 		} else {
-			tag.style.display = "none"; // Sinon, cache le tag
+			tag.style.display = "none"; 
 		}
 	});
 }
