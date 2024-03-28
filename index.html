@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="./index.css" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<meta charset="UTF-8" >
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" >
+		<link rel="stylesheet" href="./index.css" >
+		<link rel="preconnect" href="https://fonts.googleapis.com" >
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
 		<link
 			href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
 			rel="stylesheet"
-		/>
+		>
 		<title>Les petits plats</title>
 	</head>
 	<body>
 		<header class="header">
 			<div class="logo">
-				<img src="./img/Logo.png" alt="Logo des petits plats" />
+				<img src="./img/Logo.png" alt="Logo des petits plats" >
 			</div>
 			<div class="header-content">
 				<div class="header-text">
-					CHERCHEZ PARMI PLUS DE 1500 RECETTES<br />
+					CHERCHEZ PARMI PLUS DE 1500 RECETTES<br >
 					DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES
 				</div>
 				<div class="header-search">
 					<input
 						type="text"
 						placeholder="Rechercher une recette, un ingrédient, ..."
-					/>
+					>
 				</div>
 				<span class="no-result-text" style="display: none"
 					>Aucun résultat trouvé</span
@@ -38,49 +38,52 @@
 				<div class="dropdown">
 					<button class="dropdown-button ingredients-button">
 						Ingrédients
-						<img src="./img/Vector-1.svg" alt="chevron down" />
-						<img src="./img/Vector 1 (1).svg" alt="chevron up" class="chevron">
-						<div> </div>
+						<img src="./img/Chevron-bas.svg" alt="chevron down" >
+						<img
+							src="./img/Chevron-haut.svg"
+							alt="chevron up"
+							class="chevron"
+						>
 					</button>
-					
-					<input
-						type="text"
-						placeholder=""
-						class="dropdown-search"
-					/>
+
+					<input type="text" placeholder="" class="dropdown-search" >
 					<ul id="ingredients-list" class="dropdown-content"></ul>
 				</div>
-				
+
 				<div class="dropdown">
 					<button class="dropdown-button appareils-button">
 						Appareils
-						<img src="./img/Vector-1.svg" alt="" />
-						<img src="./img/Vector 1 (1).svg" alt="chevron up" class="chevron">
+						<img src="./img/Chevron-bas.svg" alt="" >
+						<img
+							src="./img/Chevron-haut.svg"
+							alt="chevron up"
+							class="chevron"
+						>
 					</button>
 					<ul id="appareils-list" class="dropdown-content"></ul>
 
-					<input type="text" placeholder="" class="dropdown-search" />
+					<input type="text" placeholder="" class="dropdown-search" >
 				</div>
 
 				<div class="dropdown">
 					<button class="dropdown-button ustensiles-button">
 						Ustensiles
-						<img src="./img/Vector-1.svg" alt="" />
-						<img src="./img/Vector 1 (1).svg" alt="chevron up" class="chevron">
+						<img src="./img/Chevron-bas.svg" alt="" >
+						<img
+							src="./img/Chevron-haut.svg"
+							alt="chevron up"
+							class="chevron"
+						>
 					</button>
 					<ul id="ustensiles-list" class="dropdown-content"></ul>
-					<input
-						type="text"
-						placeholder=""
-						class="dropdown-search"
-					/>
+					<input type="text" placeholder="" class="dropdown-search" >
 				</div>
 				<div id="total-recipes">Nombre de recettes:</div>
 			</div>
 
-			<section class="tags"></section>
+			<div class="tags"></div>
 
-			<section id="recipes__cards"></section>
+			<div id="recipes__cards"></div>
 		</main>
 
 		<script type="module" src="./index.js"></script>
