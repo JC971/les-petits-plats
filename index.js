@@ -49,7 +49,7 @@ function searchRecipes(recipes) {
   displayRecipes(results);
   ////
 
-  refreshDropdowns(results, filterAfterAddTag, filterAfterRemoveTag);
+  refreshDropdowns(results, filterAfterAddTag(recipes), filterAfterRemoveTag(recipes));
 }
 
 ////////barre de recherche
@@ -60,20 +60,7 @@ const searchByValue = (recipes) => {
 
     // Filtre les recettes seulement si ...
     if (inputValue.length >= 3 || inputValue === "") {
-      let filteredRecipes = filterRecipes({
-        recipes,
-        searchGlobal,
-        searchAppareil,
-        searchIngredients,
-        searchUstensils,
-      });
-
-      displayRecipes(filteredRecipes);
-      refreshDropdowns(
-        filteredRecipes,
-        filterAfterAddTag,
-        filterAfterRemoveTag
-      );
+      searchRecipes(recipes);
     }
   });
 };
