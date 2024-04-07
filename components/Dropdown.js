@@ -102,10 +102,11 @@ function filterDropdownTags(event) {
 		if (tag.textContent.toLowerCase().includes(filterText)) {
 			tag.style.display = ""; // Affiche le tag s'il correspond au texte filtré
 		} else {
-			tag.style.display = "none"; 
+			tag.style.display = "none";
 		}
 	});
 }
+
 export function refreshDropdowns(
 	filteredRecipes,
 	filterAfterAddTag,
@@ -192,8 +193,6 @@ function displayList(
 				.closest(".dropdown")
 				.querySelector(".dropdown-content");
 			dropdownContent.style.display = "none"; // ne plus afficher la liste
-	
 		});
-		
 	});
 }

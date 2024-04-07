@@ -19,11 +19,11 @@ function displayRecipes(recipes) {
     const recipeCard = getRecipeCard(recipe);
     recipesContainer.appendChild(recipeCard);
   });
-
+  
   // aucun résultat trouvé
   const noResultText = document.querySelector(".no-result-text");
   noResultText.style.display = recipes.length === 0 ? "block" : "none";
-
+  
   updateRecipesCount(recipes.length);
 }
 ////////////////////fin display recipes
@@ -45,10 +45,10 @@ function searchRecipes(recipes) {
     searchAppareil,
     searchUstensils,
   });
-
+  
   displayRecipes(results);
   ////
-
+  
   refreshDropdowns(results, filterAfterAddTag(recipes), filterAfterRemoveTag(recipes));
 }
 
@@ -57,7 +57,7 @@ function searchRecipes(recipes) {
 const searchByValue = (recipes) => {
   getSearchBarValue((inputValue) => {
     searchGlobal = inputValue;
-
+    
     // Filtre les recettes seulement si ...
     if (inputValue.length >= 3 || inputValue === "") {
       searchRecipes(recipes);
@@ -70,48 +70,48 @@ const filterAfterRemoveTag = (recipes) => {
     if (type === "ingredients") {
       searchIngredients = searchIngredients.filter(
         (ingredient) => ingredient !== value
-      );
-    }
-    if (type === "appareils") {
-      searchAppareil = searchAppareil.filter(
-        (appareils) => appareils !== value
-      );
-    }
-    if (type === "ustensiles") {
-      searchUstensils = searchUstensils.filter(
-        (ustensile) => ustensile !== value
-      );
-    }
-    searchRecipes(recipes);
-  };
-};
-
-const filterAfterAddTag = (recipes) => {
-  return async (value, type) => {
-    // Mise à jour des tableaux de filtres basés sur le type de tag
-    if (type === "ingredients") {
-      searchIngredients.push(value);
-    } else if (type === "appareils") {
-      searchAppareil.push(value);
-    } else if (type === "ustensiles") {
-      searchUstensils.push(value);
-    }
-
-    searchRecipes(recipes);
-  };
-};
-
-const init = async () => {
-  const { recipes } = await loadRecipes();
-  displayRecipes(recipes);
-  searchByValue(recipes);
-  displayDropdown(
-    recipes,
-
-    filterAfterAddTag(recipes),
-
-    filterAfterRemoveTag(recipes)
-  );
-};
-
-init();
+        );
+      }
+      if (type === "appareils") {
+        searchAppareil = searchAppareil.filter(
+          (appareils) => appareils !== value
+          );
+        }
+        if (type === "ustensiles") {
+          searchUstensils = searchUstensils.filter(
+            (ustensile) => ustensile !== value
+            );
+          }
+          searchRecipes(recipes);
+        };
+      };
+    
+      const filterAfterAddTag = (recipes) => {
+        return (value, type) => {
+          // Mise à jour des tableaux de filtres basés sur le type de tag
+          if (type === "ingredients") {
+            searchIngredients.push(value);
+            
+          } else if (type === "appareils") {
+            searchAppareil.push(value);
+          } else if (type === "ustensiles") {
+            searchUstensils.push(value);
+          }
+          searchRecipes(recipes);
+        }
+      }
+      
+      const init = async () => {
+        const { recipes } = await loadRecipes();
+        displayRecipes(recipes);
+        searchByValue(recipes);
+        displayDropdown(
+          recipes,
+          
+          filterAfterAddTag(recipes),
+          
+          filterAfterRemoveTag(recipes)
+          );
+        };
+        
+        init();
